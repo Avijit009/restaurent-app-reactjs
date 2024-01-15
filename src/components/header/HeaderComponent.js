@@ -1,8 +1,9 @@
 import React from 'react'
+import NavigationComponent from './NavigationComponent'
 
 const HeaderComponent = () => {
   return (
-    <div>HeaderComponent</div>
+    <NavigationComponent/>
   )
 }
 

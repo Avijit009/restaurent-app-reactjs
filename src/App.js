@@ -4,7 +4,9 @@ import MainComponent from './components/MainComponent'
 
 const App = () => {
   return (
-    <MainComponent />
+    <div className='App'>
+      <MainComponent />
+    </div>
   )
 }
 
