@@ -1,33 +1,61 @@
-import React, { useState } from "react";
+import React, { Component } from "react";
 import MenuItem from "./MenuItem";
 import DISHES from "../../data/dishes";
 import DishDetail from "./DishDetail";
+import { Button, CardColumns, Modal, ModalFooter } from "reactstrap";
 
-const Menu = () => {
-  const [dishes, setDishes] = useState(DISHES);
-
-  const [selectedDish, setSelectedDish] = useState(null);
-
-  const onSelectedDish = (dish) => {
-    setSelectedDish(dish);
+class Menu extends Component {
+  state = {
+    dishes: DISHES,
+    selectedDish: null,
+    modalOpen: false,
   };
 
-  const menu = dishes.map((dish) => {
+  onSelectedDish = (dish) => {
+    this.setState({
+      selectedDish: dish,
+      modalOpen: true,
+    });
+  };
+
+  toggleModal = () => {
+    this.setState({
+      modalOpen: !this.state.modalOpen,
+    });
+  };
+  render() {
+    const menu = this.state.dishes.map((dish) => {
+      return (
+        <MenuItem
+          dish={dish}
+          onSelectedDish={this.onSelectedDish}
+          key={dish.id}
+        />
+      );
+    });
+
+    const dishDetail = this.state.selectedDish ? (
+      <DishDetail dish={this.state.selectedDish} />
+    ) : null;
+
     return (
-      <MenuItem dish={dish} onSelectedDish={onSelectedDish} key={dish.id} />
-    );
-  });
+      <div className="container">
+        <div className="row">
+          <CardColumns>{menu}</CardColumns>
 
-  const dishDetail = selectedDish ? <DishDetail dish={selectedDish} /> : null;
-  return (
-    <div className="container">
-      <div className="row">
-        <div className="col-5 ">{menu}</div>
-
-        <div className="col-7 "> {dishDetail} </div>
+          <Modal isOpen={this.state.modalOpen}>
+            {dishDetail}
+            <ModalFooter>
+              <Button color="primary" onClick={this.toggleModal}>
+                {" "}
+                Close{" "}
+              </Button>
+            </ModalFooter>
+          </Modal>
+        </div>
       </div>
-    </div>
-  );
-};
+    );
+  }
+}
 
 export default Menu;
