@@ -3,10 +3,13 @@ import MenuItem from "./MenuItem";
 import DISHES from "../../data/dishes";
 import DishDetail from "./DishDetail";
 import { Button, CardColumns, Modal, ModalFooter } from "reactstrap";
+import COMMENTS from "../../data/comments";
 
 class Menu extends Component {
+  
   state = {
     dishes: DISHES,
+    comments: COMMENTS,
     selectedDish: null,
     modalOpen: false,
   };
@@ -24,6 +27,7 @@ class Menu extends Component {
     });
   };
   render() {
+    document.title = "Menu";
     const menu = this.state.dishes.map((dish) => {
       return (
         <MenuItem
@@ -34,8 +38,14 @@ class Menu extends Component {
       );
     });
 
+    const comments = this.state.selectedDish
+      ? this.state.comments.filter(
+          (comment) => comment.dishId === this.state.selectedDish.id
+        )
+      : [];
+
     const dishDetail = this.state.selectedDish ? (
-      <DishDetail dish={this.state.selectedDish} />
+      <DishDetail dish={this.state.selectedDish} comments={comments} />
     ) : null;
 
     return (

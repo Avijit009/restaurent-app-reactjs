@@ -3,7 +3,7 @@ import React from "react";
 import { Card, CardImg, CardBody, CardTitle, CardText } from "reactstrap";
 import LoadComments from "./LoadComments";
 
-const DishDetail = ({ dish }) => {
+const DishDetail = ({ dish, comments }) => {
   return (
     <div>
       <Card className="my-2">
@@ -43,7 +43,7 @@ const DishDetail = ({ dish }) => {
 
           <hr />
 
-            <LoadComments comments={dish.comments}/>
+          {comments && <LoadComments comments={comments} />}
 
         </CardBody>
       </Card>
