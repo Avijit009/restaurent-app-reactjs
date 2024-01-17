@@ -1,9 +1,10 @@
 import React from 'react'
-import { Route, Routes } from 'react-router-dom'
+import { Routes, Route, } from 'react-router-dom'
 import Menu from './Menu';
 import About from './About';
 import Contact from './Contact';
 import Home from './Home';
+
 
 const BodyComponent = () => {
   return (
