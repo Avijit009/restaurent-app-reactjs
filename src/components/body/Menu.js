@@ -1,15 +1,27 @@
 import React, { Component } from "react";
-import MenuItem from "./MenuItem";
-import DISHES from "../../data/dishes";
-import DishDetail from "./DishDetail";
+import { connect } from "react-redux";
 import { Button, CardColumns, Modal, ModalFooter } from "reactstrap";
-import COMMENTS from "../../data/comments";
+
+import MenuItem from "./MenuItem";
+import DishDetail from "./DishDetail";
+
+// import DISHES from "../../data/dishes";
+// import COMMENTS from "../../data/comments";
+
+
+const mapStateToProps = (state) =>{
+  console.log(state);
+  return{
+      dishes: state.dishes,
+      comments: state.comments
+  }
+}
 
 class Menu extends Component {
   
   state = {
-    dishes: DISHES,
-    comments: COMMENTS,
+    // dishes: DISHES,
+    // comments: COMMENTS,
     selectedDish: null,
     modalOpen: false,
   };
@@ -28,7 +40,7 @@ class Menu extends Component {
   };
   render() {
     document.title = "Menu";
-    const menu = this.state.dishes.map((dish) => {
+    const menu = this.props.dishes.map((dish) => {
       return (
         <MenuItem
           dish={dish}
@@ -39,7 +51,7 @@ class Menu extends Component {
     });
 
     const comments = this.state.selectedDish
-      ? this.state.comments.filter(
+      ? this.props.comments.filter(
           (comment) => comment.dishId === this.state.selectedDish.id
         )
       : [];
@@ -68,4 +80,4 @@ class Menu extends Component {
   }
 }
 
-export default Menu;
+export default connect(mapStateToProps) (Menu);
