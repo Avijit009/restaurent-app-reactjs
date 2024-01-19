@@ -69,11 +69,11 @@ class Menu extends Component {
             {dishDetail}
             <ModalFooter>
               <Button color="primary" onClick={this.toggleModal}>
-                {" "}
-                Close{" "}
+                Close
               </Button>
             </ModalFooter>
           </Modal>
+          
         </div>
       </div>
     );

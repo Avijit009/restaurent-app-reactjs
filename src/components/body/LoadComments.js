@@ -5,8 +5,9 @@ import dateFormat from "dateformat";
 const LoadComments = ({ comments }) => {
   const previewComments = comments.map((comment) => {
     return (
-      <div key={comment.dishid}>
+      <div key={comment.id}>
         <p>{comment.comment}</p>
+        <p>Rating: {comment.rating}</p>
         <h4>{comment.author}</h4>
         <p>{dateFormat(comment.date, "dddd, mmmm dS, yyyy")}</p>
         <hr />
